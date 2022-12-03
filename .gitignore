@@ -1,0 +1,7 @@
+/chormeister_bot
+/data backup
+/v0
+/.idea
+.env
+*.json
+*.todo
