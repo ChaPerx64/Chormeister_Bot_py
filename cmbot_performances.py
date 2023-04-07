@@ -1,9 +1,12 @@
-import json, traceback, datetime
+import datetime
+import json
 
 PL_PATH = 'performances.json'
 
 
 class Performance:
+    date = None
+
     def __init__(self, *args, **kwargs):
         try:
             t_dict = args[0]
@@ -80,7 +83,13 @@ class PerformanceList(list):
         return pf_list
 
     def sort(self, *args, **kwargs):
-        super(PerformanceList, self).sort(reverse=True, *args, **kwargs, key=lambda k: k.date)
+        kwargs.update(
+            {
+                'reverse': True,
+                'key': lambda k: k.date
+            }
+        )
+        super(PerformanceList, self).sort(*args, **kwargs)
 
 
 class CalendarOps:
