@@ -1,4 +1,3 @@
-/chormeister_bot
 /data backup
 /v0
 /.idea
@@ -6,3 +5,4 @@
 *.json
 *.todo
 __pycache__/
+/venv
