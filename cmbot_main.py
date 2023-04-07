@@ -1,3 +1,5 @@
+import logging
+
 from telegram.ext import (
     CommandHandler,
     ConversationHandler,
@@ -5,11 +7,8 @@ from telegram.ext import (
     filters,
     ApplicationBuilder
 )
-from telegram import (
-    Update
-)
+
 from cmbot_tel_operator import TelegramOperator, Authenticator
-import logging, json
 
 MBLIST_PATH = 'memberlist.json'
 
