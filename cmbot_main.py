@@ -5,7 +5,8 @@ from telegram.ext import (
     ConversationHandler,
     MessageHandler,
     filters,
-    ApplicationBuilder
+    ApplicationBuilder,
+    ContextTypes
 )
 
 from cmbot_tel_operator import TelegramOperator, Authenticator
