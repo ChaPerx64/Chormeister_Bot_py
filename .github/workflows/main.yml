@@ -19,6 +19,6 @@ jobs:
         script_stop: true
         script: |
           cd bots/chormeister_bot
-          git pull origin main -q
+          git pull origin master -q
           git status
           bash run.sh
