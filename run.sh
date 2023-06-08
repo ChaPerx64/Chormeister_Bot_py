@@ -1,8 +1,7 @@
 #!/bin/bash
 EXECUTABLE="cmbot_main.py"
-TARDIR="/root/bots/chormeister_bot"
 pkill -f "$EXECUTABLE"
-cd "$TARDIR"
 python3 -m venv venv
 source venv/bin/activate
+pip install -r requirements.txt
 nohup python3 "$EXECUTABLE" >/dev/null 2>&1 &
