@@ -15,6 +15,10 @@ MBLIST_PATH = 'memberlist.json'
 SELECTING_ACTION, ADDING_MEMBER, ADDING_SELF, DESCRIBING_SELF = map(chr, range(4))
 
 
+async def startup_msg(context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(str(os.getenv('OWNER_ID')), 'ChormeisterBot is up and running!')
+
+
 def main():
     # Launching logger
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -42,6 +46,7 @@ def main():
     application.add_handler(msg_hand)
     application.add_handler(conversation_handler)
     application.add_handler(member_left)
+    application.job_queue.run_once(startup_msg, 0)
     application.run_polling()
 
 
