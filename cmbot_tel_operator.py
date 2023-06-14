@@ -334,7 +334,7 @@ class TelegramOperator:
             song_1 = sl2.get_song(song_id)
             await update.message.reply_text("Показываю песню:")
             await update.message.reply_text('#' + song_id + '\n' + str(song_1))
-            keyboard_markup = ReplyKeyboardMarkup([['Смотреть исполнения', 'Добавить исполнение'],
+            keyboard_markup = ReplyKeyboardMarkup([['Смотреть исполнения'],
                                                    ['Назад', 'Домой']])
             await update.message.reply_text('Что будем делать с песней?', reply_markup=keyboard_markup)
             return 'SONG_SELECTED'
@@ -386,7 +386,7 @@ class TelegramOperator:
     async def add_performance(update, context):
         keyboard_markup = ReplyKeyboardMarkup(
             [
-                ['Смотреть исполнения', 'Добавить исполнение'],
+                ['Смотреть исполнения'],
                 ['Назад', 'Домой']
             ]
         )
