@@ -5,19 +5,25 @@ import cmbot_performances
 # MUST BE applied to the __init__() and clear() functions
 import traceback
 from cmbot_performances import Performance, PerformanceList
+from urllib.request import urlopen
+import validators
 
 
-SONG_KEYSLIST = ['status', 'name', 'lyricist', 'composer', 'translator', 'theme', 'performers', 'melodicality']
+# SONG_KEYSLIST = ['status', 'name', 'lyricist', 'composer', 'translator', 'theme', 'performers', 'melodicality']
+SONG_KEYSLIST = ['status']
 SONG_KEYSLIST_RU = ['Название', 'Автор текста', 'Композитор', 'Переводчик', 'Тема', 'Состав', 'Мелодичность']
 DB_STATE_KEYSLIST = ['SONGS', 'LASTUPDATED']
 
-F_PATH = 'songlist.json'
-PL_PATH = 'performances.json'
+# F_PATH = 'songlist.json'
+PL_PATH = 'http://127.0.0.1:8000/getchorperformances/?format=json&c=1'
 
 class Song:
     def __init__(self, *args, **kwargs):
         try:
             t_dict = args[0]
+            # SONG_KEYSLIST.clear()
+            for key in t_dict.keys():
+                SONG_KEYSLIST.append(key)
             for key in SONG_KEYSLIST:
                 if key in t_dict:
                     self.__dict__.update({key: t_dict[key]})
@@ -111,11 +117,16 @@ class SongList:
         else:
             self.sl = {}
         if path:
-            self.read_from_file(path)
-            try:
+            if validators.url(path):
+                response = urlopen(path)
+                songlist_json = json.loads(response.read())
+                self.from_json_dict(songlist_json)
+            else:
                 self.read_from_file(path)
-            except:
-                raise TypeError
+                try:
+                    self.read_from_file(path)
+                except:
+                    raise TypeError
 
     def __str__(self):
         out_str = ''

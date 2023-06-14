@@ -3,6 +3,7 @@ import calendar
 import datetime
 import json
 import os
+from tkinter.tix import Tree
 import traceback
 
 from dotenv import load_dotenv
@@ -25,8 +26,10 @@ from cmbot_performances import Performance, PerformanceList
 from cmbot_songs import SongList
 
 # A constant for storing a filepath to the main JSON file
-F_PATH = 'songlist.json'
-PL_PATH = 'performances.json'
+# F_PATH = 'songlist.json'
+F_PATH = 'http://127.0.0.1:8000/getchorsongs/?format=json&c=11'
+# PL_PATH = 'performances.json'
+PL_PATH = 'http://127.0.0.1:8000/getchorperformances/?format=json&c=11'
 MBLIST_PATH = 'memberlist.json'
 PL_PATH_BCK = 'data backup/' + PL_PATH.split('.')[0] + '_backup.json'
 F_PATH_BCK = 'data backup/' + F_PATH.split('.')[0] + '_backup.json'
@@ -72,7 +75,7 @@ class TelegramOperator:
                 await update.message.chat.leave()
             return ConversationHandler.END
         # if update.message.from_user.id == self._curr_auth.owner_id or True:
-        if update.message.from_user.id in memberlist_loader():
+        if update.message.from_user.id in memberlist_loader() or True:
             await update.message.reply_text(
                 text='Здравствуй. Начнём сначала.\nЧто ты хочешь сделать?',
                 reply_markup=KEYBOARD_HOME

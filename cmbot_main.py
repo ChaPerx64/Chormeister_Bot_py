@@ -29,8 +29,7 @@ def main():
     tel_op = TelegramOperator(curr_auth, application)
     conversation_handler = ConversationHandler(
         entry_points=[CommandHandler('start', tel_op.waiter_greeting)],
-        states=
-        {
+        states={
             'WAITER': [MessageHandler(filters.TEXT, tel_op.waiter)],
             'SEARCH': [MessageHandler(filters.TEXT, tel_op.search)],
             'SELECT_BY_ID': [MessageHandler(filters.TEXT, tel_op.select_song_by_id)],

@@ -1,4 +1,6 @@
 import datetime
+from urllib.request import urlopen
+import validators
 import json
 
 PL_PATH = 'performances.json'
@@ -70,9 +72,15 @@ class PerformanceList(list):
             self.append(perf)
 
     def read_from_file(self, pl_path):
-        with open(pl_path, 'r') as f:
-            # self.clear()
-            self.from_json_list(json.load(f))
+        if validators.url(pl_path):
+            response = urlopen(pl_path)
+            perflist_json = json.loads(response.read())
+            self.from_json_list(perflist_json)
+            # print(self)
+        else:
+            with open(pl_path, 'r') as f:
+                # self.clear()
+                self.from_json_list(json.load(f))
 
     def find_song_performances(self, song_id):
         pf_list = []
