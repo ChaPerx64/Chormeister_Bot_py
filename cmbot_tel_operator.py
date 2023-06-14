@@ -3,7 +3,6 @@ import calendar
 import datetime
 import json
 import os
-from tkinter.tix import Tree
 import traceback
 
 from dotenv import load_dotenv
